@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Ckeditors.belongsTo(models.Users, { foreignKey: 'doctorId' });
+
+            // Ckeditors.belongsTo(models.Users, { foreignKey: 'doctorId' });
         }
     };
     Ckeditors.init({

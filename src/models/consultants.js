@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Consultants.hasOne(models.ckeditor_consultants, { foreignKey: 'id' });
+      // Consultants.hasOne(models.ckeditor_consultants, { foreignKey: 'id' });
     }
   };
   Consultants.init({

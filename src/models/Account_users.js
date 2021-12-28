@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class Account_users extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,16 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Users ở dưới là tên của Model chứ không phải table trong database
-      Users.belongsTo(models.allcodes, { foreignKey: 'positionid', targetKey: 'keyMap', as: 'positionData' })
-      Users.belongsTo(models.allcodes, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
+      // Account_users ở dưới là tên của Model chứ không phải table trong database
+      
+      // Account_users.belongsTo(models.allcodes, { foreignKey: 'positionid', targetKey: 'keyMap', as: 'positionData' })
+      // Account_users.belongsTo(models.allcodes, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
 
-      Users.hasOne(models.ckeditors, { foreignKey: 'doctorId' });
+      // Account_users.hasOne(models.ckeditors, { foreignKey: 'doctorId' });
 
-      Users.hasOne(models.ckeditor_consultants, { foreignKey: 'doctorId' });
+      // Account_users.hasOne(models.ckeditor_consultants, { foreignKey: 'doctorId' });
     }
   };
-  Users.init({
+  Account_users.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     firstName: DataTypes.STRING,
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     // phải định nghĩa song song với thg migrations
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Account_users',
   });
-  return Users;
+  return Account_users;
 };

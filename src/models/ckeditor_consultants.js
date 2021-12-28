@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Ckeditor_consultants.belongsTo(models.Users, { foreignKey: 'doctorId' });
+            
+            // Ckeditor_consultants.belongsTo(models.Users, { foreignKey: 'doctorId' });
 
-            Ckeditor_consultants.belongsTo(models.consultants, {foreignKey: 'consultantId'});
+            // Ckeditor_consultants.belongsTo(models.consultants, {foreignKey: 'consultantId'});
  
             // nếu mà tìm theo consultantId thì thg consultants sẽ phụ thuộc vào ckedit_con
             // và sẽ tìm trong db của thg ckeditor_con 
