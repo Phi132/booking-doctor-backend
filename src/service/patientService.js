@@ -70,58 +70,76 @@ let submitInfoPatientHandle = (data) => {
 let nodeMailer = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                    user: process.env.EMAIL_ACCOUNT, // generated ethereal user
-                    pass: process.env.EMAIL_PASSWORD, // generated ethereal password
-                },
-            });
 
-            // send mail with defined transport object
-
-            if (data.language === 'vi') {
-                let info = await transporter.sendMail({
-                    from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
-                    to: data.emailPatient, // list of receivers
-                    subject: "Thank you", // Subject line
-                    text: "", // plain text body
-                    html: `
-                <h3> Gửi Ông/Bà ${data.namePatient} </h3>
-
-                    <br />Cảm Ơn vì đã đặt lệnh ở trang <b>WeCare.com</b>
-
-                    <br />Bạn có cuộc hẹn khám lúc <b>${data.timeEn} </b>
-                    <br /><b>Vào lúc ${data.dateAppointment}. </b>
-                    <br /> Với bác sĩ có id ....
-                    <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Bấm vào đây để xác nhận </a>
-                    <br />Cảm ơn bạn vì đã tin tưởng,
-
-                <br />We take care of you.
-                `, // html body
+            if (data) {
+                let dataHasInDB = await db.Bookings.findAll({
+                    where: {
+                        doctorid: data.doctorid,
+                        date: data.date,
+                        timetype: data.timetype
+                    },
+                    attributes: ["doctorid", "date", "timetype", "statusid", "patientid", "token"],
+                    raw: true
                 });
-            } else {
-                let info = await transporter.sendMail({
-                    from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
-                    to: data.emailPatient, // list of receivers
-                    subject: "Thank you", // Subject line
-                    text: "", // plain text body
-                    html: `
-                <h3> Dear ${data.namePatient} </h3>
 
-                    <br />Thanks for requesting information on <b>WeCare.com</b>
+                //khi khong có lịch khám này mới gửi email
+                if (dataHasInDB && dataHasInDB.length === 0) {
+                    let transporter = nodemailer.createTransport({
+                        host: "smtp.gmail.com",
+                        port: 587,
+                        secure: false, // true for 465, false for other ports
+                        auth: {
+                            user: process.env.EMAIL_ACCOUNT, // generated ethereal user
+                            pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+                        },
+                    });
 
-                    <br />You have appointment at <b>${data.timeEn} in ${data.dateAppointment}. </b>
-                    <br /> With doctor have id ....
-                    <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Click here for confirm</a>
-                    <br />Thank you,
+                    // send mail with defined transport object
 
-                <br />We take care of you.
-                `, // html body
-                });
+                    if (data.language === 'vi') {
+                        let info = await transporter.sendMail({
+                            from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
+                            to: data.emailPatient, // list of receivers
+                            subject: "Thank you", // Subject line
+                            text: "", // plain text body
+                            html: `
+                        <h3> Gửi Ông/Bà ${data.namePatient} </h3>
+    
+                            <br />Cảm Ơn vì đã đặt lệnh ở trang <b>WeCare.com</b>
+    
+                            <br />Bạn có cuộc hẹn khám lúc <b>${data.timeEn} </b>
+                            <br /><b>Vào lúc ${data.dateAppointment}. </b>
+                            <br /> Với bác sĩ có id ....
+                            <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Bấm vào đây để xác nhận </a>
+                            <br />Cảm ơn bạn vì đã tin tưởng,
+    
+                        <br />We take care of you.
+                        `, // html body
+                        });
+                    } else {
+                        let info = await transporter.sendMail({
+                            from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
+                            to: data.emailPatient, // list of receivers
+                            subject: "Thank you", // Subject line
+                            text: "", // plain text body
+                            html: `
+                        <h3> Dear ${data.namePatient} </h3>
+    
+                            <br />Thanks for requesting information on <b>WeCare.com</b>
+    
+                            <br />You have appointment at <b>${data.timeEn} in ${data.dateAppointment}. </b>
+                            <br /> With doctor have id ....
+                            <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Click here for confirm</a>
+                            <br />Thank you,
+    
+                        <br />We take care of you.
+                        `, // html body
+                        });
+                    }
+                }
+
             }
+
 
             // console.log(data);
 
@@ -175,10 +193,10 @@ let verify = (data) => {
                     await checkStatusAppointment.save();
                     resolve({
                         err: 0,
-                        mess:"xac nhan thanh cong"
+                        mess: "xac nhan thanh cong"
                     })
                 }
-                if(checkStatusAppointment2)  {
+                if (checkStatusAppointment2) {
                     resolve({
                         err: 2,
                         mess: "Lịch khám này đã được xác nhận",
