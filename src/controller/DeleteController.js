@@ -6,7 +6,7 @@ const db = require('../models/index');
 let deleteUser = (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let dataId = await db.Users.findOne({
+            let dataId = await db.Account_users.findOne({
                 where: { id: req.query.id }
             })
             if (dataId) {

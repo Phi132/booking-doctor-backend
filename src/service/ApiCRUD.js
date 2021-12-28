@@ -7,7 +7,7 @@ let createUser = (data) => {
         try {
             let hashPass = await handleHashPass(data.password);
             let isEmail = await data.email;
-            await db.Users.create({
+            await db.Account_users.create({
                 email: data.email,
                 password: hashPass,
                 firstName: data.firstName,
@@ -51,7 +51,7 @@ let handleHashPass = (password) => {
 let deleteUserData = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let isCheckIdUser = await db.Users.findOne({
+            let isCheckIdUser = await db.Account_users.findOne({
                 where: { id: id }
             })
             if (isCheckIdUser) {
@@ -83,7 +83,7 @@ let editUserData = (data) => {
                     mess: "thiếu id, gender, role, position"
                 })
             }
-            let isCheckUpdateUser = await db.Users.findOne({
+            let isCheckUpdateUser = await db.Account_users.findOne({
                 where: { id: data.id }
             })
             if (isCheckUpdateUser) {
@@ -121,7 +121,7 @@ let getDataDoctorLimit = (limit, roleId) => {
         try {
 
 
-            let dataDoctor = await db.Users.findAll({
+            let dataDoctor = await db.Account_users.findAll({
                 limit: limit,
                 where: { roleid: roleId },
                 order: [['createdAt', 'DESC'],],
@@ -170,7 +170,7 @@ let getDataDoctorLimit = (limit, roleId) => {
 let getAllDataDoctors = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let dataDoctor = await db.Users.findAll({
+            let dataDoctor = await db.Account_users.findAll({
                 where: { roleid: 'R2' },
                 attributes: {
                     exclude: ['password', 'image']

@@ -45,7 +45,7 @@ let allcode = async (req, res) => {
 
 //[get] /api/get-data
 let getData = async (req, res) => {
-    let data = await db.Users.findAll();
+    let data = await db.Account_users.findAll();
     if (data) {
         res.status(200).json({
             error: 0,

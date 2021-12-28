@@ -16,7 +16,7 @@ let getDetailDoctorId = (id) => {
                     mess: "chưa truyền id"
                 })
             }
-            let dataDetail = await db.Users.findOne({
+            let dataDetail = await db.Account_users.findOne({
                 where: { id: id },
                 attributes: {
                     exclude: ['password']
@@ -67,7 +67,7 @@ let getInfoDoctor = (id) => {
                     mess: "chưa truyền id"
                 })
             }
-            let dataDetail = await db.Users.findOne({
+            let dataDetail = await db.Account_users.findOne({
                 where: { id: id },
                 attributes: {
                     exclude: ['password', 'image']

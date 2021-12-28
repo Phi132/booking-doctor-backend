@@ -8,7 +8,7 @@ let handleUserLogin = (email, password) => {
             let useData = {};
             let isCheckUserEmail = await checkUserEmail(email);
             if (isCheckUserEmail) {
-                let isUser = await db.Users.findOne({
+                let isUser = await db.Account_users.findOne({
                     where: { email: email },
                     raw: true
                 })
@@ -53,7 +53,7 @@ let handleUserLogin = (email, password) => {
 let checkUserEmail = (email) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let isEmail = db.Users.findOne({
+            let isEmail = db.Account_users.findOne({
                 where: { email: email }
             })
             if (isEmail) {

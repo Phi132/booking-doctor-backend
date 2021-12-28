@@ -10,7 +10,7 @@ class consultantService {
     getAllDataConsultant = () => {
         return new Promise(async (resolve, reject) => {
             try {
-                let dataDoctor = await db.Users.findAll({
+                let dataDoctor = await db.Account_users.findAll({
                     where: { roleid: 'R4' },
                     attributes: {
                         exclude: ['password', 'image']
@@ -285,7 +285,7 @@ class consultantService {
                         where: { doctorId },
                         include: [
                             {
-                                model: await db.Users,
+                                model: await db.Account_users,
                                 attributes: ['firstName', 'lastName', 'image']
                             }
                         ],

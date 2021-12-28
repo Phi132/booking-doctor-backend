@@ -9,7 +9,7 @@ let store = (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
             let hashPass = await hashPassUser(req.body.password)
-            await db.Users.create({
+            await db.Account_users.create({
                 email: req.body.email,
                 password: hashPass,
                 firstName: req.body.firstName,

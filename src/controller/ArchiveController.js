@@ -3,7 +3,7 @@ const db = require('../models/index');
 let archive = (req, res) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Users.findAll({
+            let data = await db.Account_users.findAll({
                 raw: true,
             })
 
