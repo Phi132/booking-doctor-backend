@@ -3,20 +3,20 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class allcodes extends Model {
+    class Allcodes extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            allcodes.hasMany(models.Users, { foreignKey: 'positionid', as: 'positionData' })
-            allcodes.hasMany(models.Users, { foreignKey: 'gender', as: 'genderData' })
+            Allcodes.hasMany(models.Users, { foreignKey: 'positionid', as: 'positionData' })
+            Allcodes.hasMany(models.Users, { foreignKey: 'gender', as: 'genderData' })
 
-            allcodes.hasOne(models.schedules, { foreignKey: 'timetype' })
+            Allcodes.hasOne(models.schedules, { foreignKey: 'timetype' })
         }
     };
-    allcodes.init({
+    Allcodes.init({
         keyMap: DataTypes.STRING,
         type: DataTypes.STRING,
         valueEn: DataTypes.STRING,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         // phải định nghĩa song song với thg migrations
     }, {
         sequelize,
-        modelName: 'allcodes',
+        modelName: 'Allcodes',
     });
-    return allcodes;
+    return Allcodes;
 };

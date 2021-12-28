@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class consultants extends Model {
+  class Consultants extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      consultants.hasOne(models.ckeditor_consultants, { foreignKey: 'id' });
+      Consultants.hasOne(models.ckeditor_consultants, { foreignKey: 'id' });
     }
   };
-  consultants.init({
+  Consultants.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     // phải định nghĩa song song với thg migrations
   }, {
     sequelize,
-    modelName: 'consultants',
+    modelName: 'Consultants',
   });
-  return consultants;
+  return Consultants;
 };

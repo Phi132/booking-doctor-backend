@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class ckeditor_consultants extends Model {
+    class Ckeditor_consultants extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            ckeditor_consultants.belongsTo(models.Users, { foreignKey: 'doctorId' });
+            Ckeditor_consultants.belongsTo(models.Users, { foreignKey: 'doctorId' });
 
-            ckeditor_consultants.belongsTo(models.consultants, {foreignKey: 'consultantId'});
+            Ckeditor_consultants.belongsTo(models.consultants, {foreignKey: 'consultantId'});
  
             // nếu mà tìm theo consultantId thì thg consultants sẽ phụ thuộc vào ckedit_con
             // và sẽ tìm trong db của thg ckeditor_con 
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             // belongsTo ở đâu thì sẽ tìm trong db thằng đó
         }
     };
-    ckeditor_consultants.init({
+    Ckeditor_consultants.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         // phải định nghĩa song song với thg migrations
     }, {
         sequelize,
-        modelName: 'ckeditor_consultants',
+        modelName: 'Ckeditor_consultants',
     });
-    return ckeditor_consultants;
+    return Ckeditor_consultants;
 };

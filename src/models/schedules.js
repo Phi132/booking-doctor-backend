@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class schedules extends Model {
+  class Schedules extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      schedules.belongsTo(models.allcodes, {foreignKey: 'timetype', targetKey: 'keyMap',})
+      Schedules.belongsTo(models.allcodes, {foreignKey: 'timetype', targetKey: 'keyMap',})
     }
   };
-  schedules.init({
+  Schedules.init({
     id:{
         type:  DataTypes.INTEGER,
         primaryKey: true,
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     // phải định nghĩa song song với thg migrations
   }, {
     sequelize,
-    modelName: 'schedules',
+    modelName: 'Schedules',
   });
-  return schedules;
+  return Schedules;
 };

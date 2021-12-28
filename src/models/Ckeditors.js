@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class ckeditor extends Model {
+    class Ckeditors extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            ckeditor.belongsTo(models.Users, { foreignKey: 'doctorId' });
+            Ckeditors.belongsTo(models.Users, { foreignKey: 'doctorId' });
         }
     };
-    ckeditor.init({
+    Ckeditors.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         // phải định nghĩa song song với thg migrations
     }, {
         sequelize,
-        modelName: 'ckeditors',
+        modelName: 'Ckeditors',
     });
-    return ckeditor;
+    return Ckeditors;
 };

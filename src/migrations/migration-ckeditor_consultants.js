@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('ckeditor_consultants', {
+        await queryInterface.createTable('Ckeditor_consultants', {
             // phải định nghĩa song song với thằng user ở models
             id: {
                 allowNull: false,
@@ -26,6 +26,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('ckeditor_consultants');
+        await queryInterface.dropTable('Ckeditor_consultants');
     }
 };

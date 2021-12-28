@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('doctor_clinic_speciality', {
+        await queryInterface.createTable('Doctor_clinic_speciality', {
             // phải định nghĩa song song với thằng user ở models
             id: {
                 allowNull: false,
@@ -29,6 +29,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('doctor_clinic_speciality');
+        await queryInterface.dropTable('Doctor_clinic_speciality');
     }
 };
