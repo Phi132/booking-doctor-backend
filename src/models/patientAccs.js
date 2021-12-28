@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // PatientAccs ở dưới là tên của Model chứ không phải table trong database
       
-      // PatientAccs.belongsTo(models.allcodes, { foreignKey: 'positionid', targetKey: 'keyMap', as: 'positionData' })
-      // PatientAccs.belongsTo(models.allcodes, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
+      PatientAccs.belongsTo(models.Allcodes, { foreignKey: 'positionid', targetKey: 'keyMap', as: 'positionData' })
+      PatientAccs.belongsTo(models.Allcodes, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
 
-      // PatientAccs.hasOne(models.ckeditors, { foreignKey: 'doctorId' });
+      PatientAccs.hasOne(models.Ckeditors, { foreignKey: 'doctorId' });
     
     }
   };
