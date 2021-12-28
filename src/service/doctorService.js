@@ -23,7 +23,7 @@ let getDetailDoctorId = (id) => {
                 },
                 include: [
                     {
-                        model: db.ckeditors,
+                        model: db.Ckeditors,
                         attributes: ['contentHTML', 'description', 'doctorId']
                     },
 
@@ -74,11 +74,11 @@ let getInfoDoctor = (id) => {
                 },
                 include: [
                     {
-                        model: db.allcodes, as: 'positionData',
+                        model: db.Allcodes, as: 'positionData',
                         attributes: ['valueEn', 'valueVi']
                     },
                     {
-                        model: db.allcodes, as: 'genderData',
+                        model: db.Allcodes, as: 'genderData',
                         attributes: ['valueEn', 'valueVi']
                     },
 
@@ -121,16 +121,18 @@ let saveSchedule = (dataSchedule) => {
                 })
             }
             if (data && data.length > 0) {
-                let dataScheduleCheck = await db.schedules.findAll({
+                let dataScheduleCheck = await db.Schedules.findAll({
                     where: { doctorid: data[0].doctorid, appointment: data[0].appointment },
                     attributes: ["appointment", "timetype", "doctorid", "maxnumber", "timestamp"],
                     raw: true
                 })
                 let isCheck = _.differenceWith(data, dataScheduleCheck, (a, b) => {
+
                     return a.timetype === b.timetype && a.appointment === b.appointment;
                 })
+                console.log(isCheck);
                 if (isCheck && isCheck.length > 0) {
-                    await db.schedules.bulkCreate(isCheck);
+                    await db.Schedules.bulkCreate(isCheck);
                     resolve({
                         err: 0,
                         mess: "da gui thanh cong"
@@ -138,7 +140,7 @@ let saveSchedule = (dataSchedule) => {
 
                 } else {
                     resolve({
-                        err: 0,
+                        err: 6,
                         mess: "da co"
                     })
                 }
@@ -153,14 +155,17 @@ let saveSchedule = (dataSchedule) => {
 
 
         } catch (e) {
-            reject(e)
+            reject({
+                err: 7,
+                e
+            })
         }
     })
 }
 let detailAppointmentDoctor = (date, id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let findAppointment = await db.schedules.findAll({
+            let findAppointment = await db.Schedules.findAll({
                 where: {
                     doctorid: id,
                     timestamp: date
@@ -170,7 +175,7 @@ let detailAppointmentDoctor = (date, id) => {
                 },
                 include: [
                     {
-                        model: db.allcodes,
+                        model: db.Allcodes,
                     },
 
                 ],
@@ -210,7 +215,7 @@ let saveMedicalSpecialtyHandle = (data) => {
                 })
 
             } else {
-                await db.specialties.create({
+                await db.Specialties.create({
                     name: data.name,
                     image: data.image,
                     contentHTMLspecialties: data.contentHTMLspecialties
@@ -240,7 +245,7 @@ let saveRemoteConsultantHandle = (data) => {
                 })
 
             } else {
-                await db.consultants.create({
+                await db.Consultants.create({
                     name: data.name,
                     image: data.image,
                     contentHTMLconsultants: data.contentHTMLconsultants
@@ -263,7 +268,7 @@ let allMedicalSpecialtyHandle = () => {
     return new Promise(async (resolve, reject) => {
         try {
 
-            let data = await db.specialties.findAll({
+            let data = await db.Specialties.findAll({
                 attributes: {
                     exclude: ['contentHTMLspecialties']
                 },
@@ -291,7 +296,7 @@ let allRConsultantHandle = () => {
     return new Promise(async (resolve, reject) => {
         try {
 
-            let data = await db.consultants.findAll({
+            let data = await db.Consultants.findAll({
                 attributes: {
                     exclude: ['contentHTMLconsultants']
                 },
@@ -319,7 +324,7 @@ let infoMSbyID = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             // find speacialty in db by id
-            let data = await db.specialties.findOne({
+            let data = await db.Specialties.findOne({
                 where: {
                     id
                 }
@@ -349,7 +354,7 @@ let infoRCbyID = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             // find speacialty in db by id
-            let data = await db.consultants.findOne({
+            let data = await db.Consultants.findOne({
                 where: {
                     id
                 }
@@ -381,7 +386,7 @@ let getDoctorInfo = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             // find speacialty in db by id
-            let data = await db.ckeditors.findAll({
+            let data = await db.Ckeditors.findAll({
                 where: {
                     specialtyId: id,
                 },

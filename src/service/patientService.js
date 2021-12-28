@@ -18,7 +18,7 @@ let submitInfoPatientHandle = (data) => {
         try {
             //console.log(data[0]);
             if (data && data.length > 0) {
-                let dataHasInDB = await db.bookings.findAll({
+                let dataHasInDB = await db.Bookings.findAll({
                     where: {
                         patientid: data[0].patientid,
                         doctorid: data[0].doctorid,
@@ -37,7 +37,7 @@ let submitInfoPatientHandle = (data) => {
                 // let token = uuidv4();
                 // buil
                 if (isCheck && isCheck.length > 0) {
-                    await db.bookings.create({
+                    await db.Bookings.create({
                         timetype: isCheck[0].timetype,
                         date: isCheck[0].date,
                         doctorid: isCheck[0].doctorid,
@@ -152,7 +152,7 @@ let verify = (data) => {
                     mess: "gui thieu token hoac email",
                 })
             } else {
-                let checkStatusAppointment = await db.bookings.findOne({
+                let checkStatusAppointment = await db.Bookings.findOne({
                     where: {
                         doctorid: data.doctorid,
                         token: data.token,
@@ -160,7 +160,7 @@ let verify = (data) => {
                     },
                     raw: false
                 })
-                let checkStatusAppointment2 = await db.bookings.findOne({
+                let checkStatusAppointment2 = await db.Bookings.findOne({
                     where: {
                         doctorid: data.doctorid,
                         token: data.token,

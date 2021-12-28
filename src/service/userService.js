@@ -72,7 +72,7 @@ let getDataAllCode = (typeInput) => {
     return new Promise(async (resolve, reject) => {
         try {
             let AllCode = {};
-            let data = await db.allcodes.findAll({
+            let data = await db.Allcodes.findAll({
                 where: { type: typeInput },
                 raw: true
             })

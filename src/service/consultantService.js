@@ -44,7 +44,7 @@ class consultantService {
                         mess: "thiếu id, gender, role, position"
                     })
                 }
-                await db.ckeditor_consultants.create({
+                await db.Ckeditor_consultants.create({
                     contentHTML: data.contentHTML,
                     description: data.description,
                     doctorId: data.doctorId,
@@ -71,7 +71,7 @@ class consultantService {
                         mess: "thiếu contentHTML"
                     })
                 }
-                let isCheckUpdateUser = await db.ckeditor_consultants.findOne({
+                let isCheckUpdateUser = await db.Ckeditor_consultants.findOne({
                     where: { doctorId: data.doctorId },
 
                 })
@@ -116,11 +116,11 @@ class consultantService {
                         mess: "chưa truyền id"
                     })
                 }
-                let dataDetail = await db.ckeditor_consultants.findOne({
+                let dataDetail = await db.Ckeditor_consultants.findOne({
                     where: { doctorId: doctorId },
                     include: [
                         {
-                            model: db.consultants,
+                            model: db.Consultants,
                             attributes: ['name', 'id']
                         },
                     ],
@@ -157,7 +157,7 @@ class consultantService {
                         mess: "thiếu tham số gòi"
                     })
                 } else {
-                    await db.ckeditor_consultants.create({
+                    await db.Ckeditor_consultants.create({
                         contentHTML: data.contentHTML,
                         description: data.description,
                         doctorId: data.doctorId,
@@ -184,7 +184,7 @@ class consultantService {
                         data
                     })
                 } else {
-                    let dataOld = await db.ckeditor_consultants.findOne({
+                    let dataOld = await db.Ckeditor_consultants.findOne({
                         where: { doctorId: data.doctorId }
                     });
                     if (dataOld) {
@@ -214,7 +214,7 @@ class consultantService {
     allTypeConsultantConsultant = () => {
         return new Promise(async (resolve, reject) => {
             try {
-                let dbConsultant = await db.consultants.findAll({
+                let dbConsultant = await db.Consultants.findAll({
                     attributes: {
                         exclude: ['contentHTMLconsultants', 'image', 'createdAt', 'updatedAt']
                     },
@@ -247,7 +247,7 @@ class consultantService {
                         mess: "missing consultantId parament"
                     })
                 } else {
-                    let user = await db.ckeditor_consultants.findAll({
+                    let user = await db.Ckeditor_consultants.findAll({
                         where: {
                             consultantId
                         }
@@ -281,7 +281,7 @@ class consultantService {
                         mess: "missing docotrId"
                     })
                 } else {
-                    let data = await db.ckeditor_consultants.findOne({
+                    let data = await db.Ckeditor_consultants.findOne({
                         where: { doctorId },
                         include: [
                             {

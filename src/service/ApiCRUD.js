@@ -130,11 +130,11 @@ let getDataDoctorLimit = (limit, roleId) => {
                 },
                 include: [
                     {
-                        model: db.allcodes, as: 'positionData',
+                        model: db.Allcodes, as: 'positionData',
                         attributes: ['valueEn', 'valueVi']
                     },
                     {
-                        model: db.allcodes, as: 'genderData',
+                        model: db.Allcodes, as: 'genderData',
                         attributes: ['valueEn', 'valueVi']
                     },
 
@@ -198,7 +198,7 @@ let getAllDataDoctors = () => {
 let getAllDataSpecialty = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let dataSpecialty = await db.specialties.findAll({
+            let dataSpecialty = await db.Specialties.findAll({
                 attributes: {
                     exclude: ['contentHTMLspecialties', 'image']
                 },
@@ -231,7 +231,7 @@ let saveInfoDetailDoctor = (data) => {
                     mess: "thiếu id, gender, role, position"
                 })
             }
-            await db.ckeditors.create({
+            await db.Ckeditors.create({
                 contentHTML: data.contentHTML,
                 description: data.description,
                 doctorId: data.doctorId,
@@ -258,7 +258,7 @@ let storeInfoDetailDoctor = (data) => {
                     mess: "thiếu contentHTML"
                 })
             }
-            let isCheckUpdateUser = await db.ckeditors.findOne({
+            let isCheckUpdateUser = await db.Ckeditors.findOne({
                 where: { doctorId: data.doctorId },
 
             })

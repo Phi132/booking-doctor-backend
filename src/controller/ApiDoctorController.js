@@ -40,6 +40,7 @@ class ApiDoctorController {
     //[POST] /api/save-schedule-appointment
     scheduleAppointment = async (req, res) => {
         try {
+            
             let saveScheduleDoctor = await saveSchedule(req.body);
             res.status(200).json({
                 saveScheduleDoctor
