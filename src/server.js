@@ -4,13 +4,18 @@ const route = require('./routes');
 const viewEngine = require('./config/viewEngine');
 const connectDB = require('./config/connectDB');
 const cors = require('cors');
+const app = express();
+
+
+const http = require('http');
+const server = http.createServer(app);
 
 require('dotenv').config();
 
 let port = process.env.PORT || 1234;
 
 
-const app = express();
+
 
 app.use(cors({
     origin: "*"
@@ -47,7 +52,7 @@ route(app);
 connectDB();
 
 
-const io = require("socket.io")(process.env.RTCPORT || 8183, {
+const io = require("socket.io")(server, {
     cors: {
         origin: '*'
     }
@@ -111,6 +116,6 @@ io.on('connection', (socket) => {
 
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
