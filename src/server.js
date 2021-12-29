@@ -47,7 +47,7 @@ route(app);
 connectDB();
 
 
-const io = require("socket.io")(8183, {
+const io = require("socket.io")(process.env.RTCPORT || 8183, {
     cors: {
         origin: '*'
     }
