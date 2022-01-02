@@ -140,10 +140,18 @@ let nodeMailer = (data) => {
 
                     }
 
+                    resolve({
+                        err: 0,
+                        mess: "da gui thanh cong",
+                        dataHasInDB
+                    })
+
                 } else {
+
                     resolve({
                         err: 10,
                         mess: "da co lich kham nay trong db",
+                        dataHasInDB
 
                     })
                 }
@@ -153,10 +161,6 @@ let nodeMailer = (data) => {
 
             // console.log(data);
 
-            resolve({
-                err: 0,
-                mess: "da gui thanh cong",
-            })
 
 
 
