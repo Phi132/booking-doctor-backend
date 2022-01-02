@@ -81,13 +81,13 @@ let nodeMailer = (data) => {
                     attributes: ["doctorid", "date", "timetype", "statusid", "patientid", "token"],
                     raw: true
                 });
-
+                
                 //khi khong có lịch khám này mới gửi email
                 if (dataHasInDB && dataHasInDB.length === 0) {
                     let transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
-                        port: 587,
-                        secure: false, // true for 465, false for other ports
+                        port: 465,
+                        secure: true, // true for 465, false for other ports
                         auth: {
                             user: process.env.EMAIL_ACCOUNT, // generated ethereal user
                             pass: process.env.EMAIL_PASSWORD, // generated ethereal password
@@ -98,7 +98,7 @@ let nodeMailer = (data) => {
 
                     if (data.language === 'vi') {
                         let info = await transporter.sendMail({
-                            from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
+                            from: '"Thành Phi🥪🥪🥪🥪"<thanhphi107610@gmail.com>', // sender address
                             to: data.emailPatient, // list of receivers
                             subject: "Thank you", // Subject line
                             text: "", // plain text body
@@ -118,7 +118,7 @@ let nodeMailer = (data) => {
                         });
                     } else {
                         let info = await transporter.sendMail({
-                            from: '"Thành Phi🥪🥪🥪🥪"<nguyenthanh981231@gmail.com>', // sender address
+                            from: '"Thành Phi🥪🥪🥪🥪"<thanhphi107610@gmail.com>', // sender address
                             to: data.emailPatient, // list of receivers
                             subject: "Thank you", // Subject line
                             text: "", // plain text body
@@ -136,6 +136,12 @@ let nodeMailer = (data) => {
                         `, // html body
                         });
                     }
+                } else {
+                    resolve({
+                        err: 9,
+                        mess: "da co lich kham nay trong db",
+
+                    })
                 }
 
             }
