@@ -47,11 +47,12 @@ class PatientController {
         try {
             
             let verifyy = await verify(req.query);
-
-            res.status(200).json({
-                verifyy
-            });
             res.render("SuccessConfirm.ejs");
+
+            // res.status(200).json({
+            //     verifyy
+            // });
+            
 
         } catch (e) {
             res.status(200).json({
