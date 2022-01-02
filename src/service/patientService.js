@@ -70,9 +70,10 @@ let submitInfoPatientHandle = (data) => {
 let nodeMailer = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            
+
             if (data) {
-                let dataHasInDB = await db.Bookings.findOne({
+                let dataHasInDB = [];
+                dataHasInDB = await db.Bookings.findOne({
                     where: {
                         doctorid: data.doctorid,
                         date: data.date,
@@ -81,7 +82,7 @@ let nodeMailer = (data) => {
                     attributes: ["doctorid", "date", "timetype", "statusid", "patientid", "token"],
                     raw: true
                 });
-                
+
                 //khi khong có lịch khám này mới gửi email
                 if (dataHasInDB && dataHasInDB.length > 0) {
                     resolve({
@@ -122,7 +123,7 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
-                        
+
                     } else {
                         let info = await transporter.sendMail({
                             from: '"Thành Phi🥪🥪🥪🥪"<thanhphi107610@gmail.com>', // sender address
@@ -142,7 +143,7 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
-                        
+
                     }
                 }
 
