@@ -84,7 +84,7 @@ let nodeMailer = (data) => {
                 });
 
                 //khi khong có lịch khám này mới gửi email
-                if (dataHasInDB && dataHasInDB.length === 0) {
+                if (dataHasInDB && dataHasInDB.length === 0 || dataHasInDB === null) {
                     let transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: 465,
@@ -156,6 +156,13 @@ let nodeMailer = (data) => {
                     })
                 }
 
+            } else {
+                resolve({
+                    err: 11,
+                    mess: "gui thieu data",
+                    dataHasInDB
+
+                })
             }
 
 
