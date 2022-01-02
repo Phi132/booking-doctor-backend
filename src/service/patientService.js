@@ -111,7 +111,7 @@ let nodeMailer = (data) => {
                             <br />Bạn có cuộc hẹn khám lúc <b>${data.timeEn} </b>
                             <br /><b>Vào lúc ${data.dateAppointment}. </b>
                             <br /> Với bác sĩ có id ....
-                            <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Bấm vào đây để xác nhận </a>
+                            <br /><a href="${process.env.REACT_LINK}/api/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Bấm vào đây để xác nhận </a>
                             <br />Cảm ơn bạn vì đã tin tưởng,
     
                         <br />We take care of you.
@@ -131,7 +131,7 @@ let nodeMailer = (data) => {
     
                             <br />You have appointment at <b>${data.timeEn} in ${data.dateAppointment}. </b>
                             <br /> With doctor have id ....
-                            <br /><a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Click here for confirm</a>
+                            <br /><a href="${process.env.REACT_LINK}/api/verify-token-appointment?token=${token}&doctorid=${data.doctorid}">Click here for confirm</a>
                             <br />Thank you,
     
                         <br />We take care of you.
@@ -185,6 +185,7 @@ let nodeMailer = (data) => {
 let verify = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log(data);
             if (!data.token || !data.doctorid) {
                 resolve({
                     err: 1,

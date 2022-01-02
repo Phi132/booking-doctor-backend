@@ -42,14 +42,16 @@ class PatientController {
             console.log("lỗi khong gui email nguoi dung", e);
         }
     }
-    //[POST] /verify-token-appointment
+    //[GET] /verify-token-appointment
     verifyAppointment = async (req, res) => {
         try {
-            let verifyy = await verify(req.body);
+            
+            let verifyy = await verify(req.query);
 
             res.status(200).json({
                 verifyy
-            })
+            });
+            res.render("SuccessConfirm.ejs");
 
         } catch (e) {
             res.status(200).json({

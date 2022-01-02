@@ -63,7 +63,7 @@ router.post('/submit-info-patient', PatientController.submitInfoPatient);
 // response email for customer
 router.post('/send-email-to-patient', PatientController.sendEmailToPatient);
 // verify appointment 
-router.post('/verify-token-appointment', PatientController.verifyAppointment);
+router.get('/verify-token-appointment', PatientController.verifyAppointment);
 
 //  ------------------- Consultant ----------------
 // get all type remote consultant
