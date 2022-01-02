@@ -84,13 +84,7 @@ let nodeMailer = (data) => {
                 });
 
                 //khi khong có lịch khám này mới gửi email
-                if (dataHasInDB && dataHasInDB.length > 0) {
-                    resolve({
-                        err: 10,
-                        mess: "da co lich kham nay trong db",
-
-                    })
-                } else {
+                if (dataHasInDB && dataHasInDB.length === 0) {
                     let transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: 465,
@@ -145,6 +139,13 @@ let nodeMailer = (data) => {
                         });
 
                     }
+
+                } else {
+                    resolve({
+                        err: 10,
+                        mess: "da co lich kham nay trong db",
+
+                    })
                 }
 
             }
