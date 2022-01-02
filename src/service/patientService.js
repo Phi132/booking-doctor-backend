@@ -70,9 +70,9 @@ let submitInfoPatientHandle = (data) => {
 let nodeMailer = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-
+            
             if (data) {
-                let dataHasInDB = await db.Bookings.findAll({
+                let dataHasInDB = await db.Bookings.findOne({
                     where: {
                         doctorid: data.doctorid,
                         date: data.date,
@@ -81,9 +81,15 @@ let nodeMailer = (data) => {
                     attributes: ["doctorid", "date", "timetype", "statusid", "patientid", "token"],
                     raw: true
                 });
-
+                
                 //khi khong có lịch khám này mới gửi email
-                if (dataHasInDB && dataHasInDB.length === 0) {
+                if (dataHasInDB && dataHasInDB.length > 0) {
+                    resolve({
+                        err: 10,
+                        mess: "da co lich kham nay trong db",
+
+                    })
+                } else {
                     let transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: 465,
@@ -116,7 +122,7 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
-                        console.log("ket qua gui ", info);
+                        
                     } else {
                         let info = await transporter.sendMail({
                             from: '"Thành Phi🥪🥪🥪🥪"<thanhphi107610@gmail.com>', // sender address
@@ -136,14 +142,8 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
-                        console.log("ket qua gui ", info);
+                        
                     }
-                } else {
-                    resolve({
-                        err: 9,
-                        mess: "da co lich kham nay trong db",
-
-                    })
                 }
 
             }
