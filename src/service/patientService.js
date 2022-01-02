@@ -81,7 +81,7 @@ let nodeMailer = (data) => {
                     attributes: ["doctorid", "date", "timetype", "statusid", "patientid", "token"],
                     raw: true
                 });
-                
+
                 //khi khong có lịch khám này mới gửi email
                 if (dataHasInDB && dataHasInDB.length === 0) {
                     let transporter = nodemailer.createTransport({
@@ -116,6 +116,7 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
+                        console.log("ket qua gui ", info);
                     } else {
                         let info = await transporter.sendMail({
                             from: '"Thành Phi🥪🥪🥪🥪"<thanhphi107610@gmail.com>', // sender address
@@ -135,6 +136,7 @@ let nodeMailer = (data) => {
                         <br />We take care of you.
                         `, // html body
                         });
+                        console.log("ket qua gui ", info);
                     }
                 } else {
                     resolve({
