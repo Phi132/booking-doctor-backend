@@ -106,34 +106,34 @@ io.on('connection', (socket) => {
     socket.on("calluser", ({ userToCall, signalData, from, name }) => {
         io.to(userToCall).emit("callUser", { signal: signalData, from, name });
 
-        // calling signal
-        io.emit("CALLING", { isCalling: true });
+        // // calling signal
+        // io.emit("CALLING", { isCalling: true });
 
-        //camera call
-        socket.on("clickCamera", Camera => {
-            io.emit("IS_OPEN_CAMERA_CALL", { isOpenCameraCall: Camera.isOpenCameraCall, id: from });
-        });
-        // micro call
-        socket.on("clickMicro", Micro => {
-            io.emit("IS_OPEN_MICRO_CALL", { isOpenMicroCall: Micro.isOpenMicroCall, id: from });
-        });
+        // //camera call
+        // socket.on("clickCamera", Camera => {
+        //     io.emit("IS_OPEN_CAMERA_CALL", { isOpenCameraCall: Camera.isOpenCameraCall, id: from });
+        // });
+        // // micro call
+        // socket.on("clickMicro", Micro => {
+        //     io.emit("IS_OPEN_MICRO_CALL", { isOpenMicroCall: Micro.isOpenMicroCall, id: from });
+        // });
 
     });
     socket.on("answercall", (data) => {
         io.to(data.to).emit("callaccepted", data.signal);
         io.to(data.to).emit("CALL_NAME_FROM", { name: data.callFrom, id: data.myId });
 
-        // calling signal
-        io.emit("CALLING", { isCalling: false });
-        //camera answer
-        socket.on("clickCamera", Camera => {
-            io.emit("IS_OPEN_CAMERA_ANSWER", { isOpenCameraAnswer: Camera.isOpenCameraAnswer, id: data.myId });
-        });
-        //micro answer
-        socket.on("clickMicro", Micro => {
+        // // calling signal
+        // io.emit("CALLING", { isCalling: false });
+        // //camera answer
+        // socket.on("clickCamera", Camera => {
+        //     io.emit("IS_OPEN_CAMERA_ANSWER", { isOpenCameraAnswer: Camera.isOpenCameraAnswer, id: data.myId });
+        // });
+        // //micro answer
+        // socket.on("clickMicro", Micro => {
 
-            io.emit("IS_OPEN_MICRO_ANSWER", { isOpenMicroAnswer: Micro.isOpenMicroAnswer, id: data.myId });
-        });
+        //     io.emit("IS_OPEN_MICRO_ANSWER", { isOpenMicroAnswer: Micro.isOpenMicroAnswer, id: data.myId });
+        // });
 
 
     });
