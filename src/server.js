@@ -81,6 +81,7 @@ io.on('connection', (socket) => {
         obj.socketId = socket.id;
         listOnlineUser.push(obj);
         io.emit("DANH_SACH_ONLINE", listOnlineUser);
+        console.log(listOnlineUser);
         if (dataUser.roleid === 'R4') {
             const isExistConsultant = listOnlineConsultant.some(e => e.idConsultant === dataUser.id);
             if (isExistConsultant) {
