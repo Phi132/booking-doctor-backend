@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
         io.to(userToCall).emit("callUser", { signal: signalData, from, name });
 
         // calling signal
-        io.emit("CALLING", { isCalling: true });
+        io.to(userToCall).emit("CALLING", { isCalling: true });
 
         //camera call
         socket.on("clickCamera", Camera => {
