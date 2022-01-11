@@ -139,7 +139,7 @@ let nodeMailer = (data) => {
                                                     <h3>Thật tuyện vời khi chúng tôi nhận được lịch hẹn của ${data.namePatient} </h3>
                                                     <h3>Lịch hẹn của bạn vào lúc ${data.timeVi} ngày ${data.dateAppointment} </h3>
                                                     <p style="margin-top: 25px;">
-                                                        <a href="${process.env.REACT_LINK}" class="btn btn-primary"
+                                                        <a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}" class="btn btn-primary"
                                                         style=" padding: 15px;
                                                                 border-radius: 5px;
                                                                 background: #30e3ca;
@@ -208,7 +208,7 @@ let nodeMailer = (data) => {
                                                     <h3>
                                                     Schedule your appointment at ${data.timeEn} , ${data.dateAppointment} </h3>
                                                     <p style="margin-top: 25px;">
-                                                        <a href="${process.env.REACT_LINK}" class="btn btn-primary"
+                                                        <a href="${process.env.REACT_LINK}/verify-token-appointment?token=${token}&doctorid=${data.doctorid}" class="btn btn-primary"
                                                         style=" padding: 15px;
                                                                 border-radius: 5px;
                                                                 background: #30e3ca;
