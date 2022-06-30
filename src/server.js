@@ -104,6 +104,7 @@ io.on('connection', (socket) => {
         io.emit('TU_VAN_VIEN_ONLINE', listOnlineConsultant);
     });
 
+    // người gọi
     socket.on("calluser", ({ userToCall, signalData, from, name }) => {
         io.to(userToCall).emit("callUser", { signal: signalData, from, name });
 
@@ -119,7 +120,15 @@ io.on('connection', (socket) => {
             io.emit("IS_OPEN_MICRO_CALL", { isOpenMicroCall: Micro.isOpenMicroCall, id: from });
         });
 
+        // chat
+        socket.on("messContent", (data) => {
+            console.log(data);
+            socket.to(data.idYourFriend).emit("RECEIVE_MESS", data);
+        })
+
     });
+
+    // người bắt máy
     socket.on("answercall", (data) => {
         io.to(data.to).emit("callaccepted", data.signal);
         io.to(data.to).emit("CALL_NAME_FROM", { name: data.callFrom, id: data.myId });
@@ -132,10 +141,14 @@ io.on('connection', (socket) => {
         });
         //micro answer
         socket.on("clickMicro", Micro => {
-
             io.emit("IS_OPEN_MICRO_ANSWER", { isOpenMicroAnswer: Micro.isOpenMicroAnswer, id: data.myId });
         });
 
+        // chat
+        socket.on("messContent", (data) => {
+            console.log(data);
+            socket.to(data.idYourFriend).emit("RECEIVE_MESS", data);
+        })
 
     });
 
