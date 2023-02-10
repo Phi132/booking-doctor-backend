@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "zbyzxelmjhtjqy",
-    "password": "2031eaee356898ce6bacc81608142da00d5c8cf6d9742a91b8c4222def6e745c",
-    "database": "dktmrfbrues8i",
-    "host": "ec2-54-147-76-191.compute-1.amazonaws.com",
+    "username": "tphi10761",
+    "password": "3sL7oJtqXTiF",
+    "database": "neondb",
+    "host": "ep-shiny-dream-531291.us-east-2.aws.neon.tech",
     "dialect": "postgres",
     "logging": false,
     "query": {

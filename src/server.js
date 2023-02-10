@@ -45,7 +45,9 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 
 
-viewEngine(app);
+app.get('/', (req, res) => {
+    res.send('Hello!')
+})
 
 route(app);
 
